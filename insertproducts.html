@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Insert Page</title>
+    <style>
+        body {
+            background-color: rgb(213, 233, 178);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        header {
+            background-color: #8b18a8;
+            color: rgb(165, 130, 130);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        h1{
+            color: #e0d5dd;
+        }
+
+        h3{
+            color: #9b6206; 
+        }
+
+        table {
+            width: 50%;
+            margin: auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            background-color: rgb(217, 217, 141);
+            color: #333;
+        }
+
+        input[type="submit"] {
+            background-color: #3bf387;
+            color: rgb(35, 6, 6);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #27ae60;
+        }
+
+        a {
+            color: #0a4a74;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            border: 2px solid #073c60;
+            border-radius: 5px;
+            padding: 8px 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <header>
+            <h1><b>PRODUCT DETAILS FORM</b></h1>
+        </header>
+        <h3><b>Add a Product to the Inventory for the current User: "{{user.fname}}"</b></h3>
+        <hr/>
+        <form method="POST">
+            {% csrf_token %}
+            <table border="1">
+                <tr>
+                    <td><b>Product Name</b></td>
+                    <td><input type="text" placeholder="Enter Product Name" name="pname"></td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td><input type="text" placeholder="Enter Product Description" name="desc"></td>
+                </tr>
+                <tr>
+                    <td><b>Stock Quantity</b></td>
+                    <td><input type="text" placeholder="Enter Stock Quantity" name="stqty"></td>
+                </tr>
+                <tr>
+                    <td><b>Price</b></td>
+                    <td><input type="text" placeholder="Enter price value" name="price"></td>
+                </tr>
+                <tr>
+                    <td><b>Click "Add" to insert products</b></td>
+                    <td><b><input type="submit" value="Add"/></b></td>
+                    <td>
+                        {% if messages %}
+                            {% for mess in messages %}
+                                <b style="color:rgb(183, 138, 187);">{{mess}}</b>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <a href="{% url 'addedProductDetails' user.users_id%}"><b>Go to Product Inventory</b></a>
+        </form>
+    </center>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Edit Page</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Light gray background */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        center {
+            margin-top: 50px;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            font-size: 24px;
+        }
+
+        h1 {
+            color: #404040;
+        }
+
+        h3 {
+            color: #555;
+        }
+
+        table {
+            width: 50%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        b {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <header>
+            <b>EDIT PRODUCT FORM</b>
+        </header>
+        <h1>The below form is for the User: "{{user.fname}}"</h1>
+        <h3>Edit your Product using below Form</h3>
+
+        <form method="POST" action="/UpdateProducts/{{ProductDetailsModel.id}}/{{user.users_id}}">
+            {% csrf_token %}
+            <table border="1">
+                <tr>
+                    <td><b>Product Name</b></td>
+                    <td><input type="text" name="pname" value="{{ProductDetailsModel.pname}}" readonly></td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td><input type="text" name="desc" value="{{ProductDetailsModel.desc}}"></td>
+                </tr>
+                <tr>
+                    <td><b>Stock Quantity</b></td>
+                    <td><input type="text" name="stqty" value="{{ProductDetailsModel.stqty}}"></td>
+                </tr>
+                <tr>
+                    <td><b>Price</b></td>
+                    <td><input type="text" name="price" value="{{ProductDetailsModel.price}}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b><input type="submit" value="Update Record"></b></td>
+                </tr>
+            </table>
+        </form>
+        <a href="{% url 'addedProductDetails' user.users_id%}">Go to Product Home Page</a>
+
+        {% if messages %}
+            {% for mess in messages %}
+                <b style="color: rgb(222, 193, 103);">{{ mess }}</b>
+            {% endfor %}
+        {% endif %}
+
+    </center>
+</body>
+</html>

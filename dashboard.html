@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(166, 235, 234); /* Light Blue */
+    margin: 0;
+    padding: 0;
+}
+
+        center {
+            margin-top: 50px;
+        }
+
+        header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2d0494;
+            margin-bottom: 20px;
+        }
+
+        h1{
+            color: rgb(120, 12, 23);
+        }
+
+        h3{
+            color: rgb(19, 140, 31);
+        }
+
+        h3 a {
+    text-decoration: underline;
+    color: rgb(59, 13, 96); /* Link color */
+    cursor: pointer;
+}
+
+
+        hr {
+            border: 1px solid rgb(22, 2, 51);
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-bottom: 20px;
+            color: #1a0303; /* Table text color */
+        }
+
+        th, td {
+            border: 1px solid #051f27;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgb(185, 205, 139);
+            color: rgb(23, 55, 2);
+        }
+
+        a {
+            color: #300b25;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+        .styled-link {
+    color: rgb(80, 4, 4); /* Link color */
+    background-color: rgb(237, 227, 86); /* Background color */
+    padding: 8px 12px; /* Padding */
+    border-radius: 4px; /* Border radius for rounded corners */
+    text-decoration: none; /* Remove default underline */
+    display: inline-block; /* Make it a block element with inline characteristics */
+}
+
+.styled-link:hover {
+    background-color: #b461e4; /* Change background color on hover */
+}
+
+    </style>
+    <script>
+        function toggleTable() {
+            var table = document.getElementById('userTable');
+            table.classList.toggle('hidden');
+        }
+    </script>
+</head>
+<body>
+    <center>
+        <header><b>Welcome to Inventory Management System Application Dashboard</b></header>
+        <hr/>
+        <h1>USER ENROLLMENT PAGE</h1>
+        <h3>Sign Up for New User Registration</h3>
+        <a href="{% url 'InsertUser' %}" class="styled-link"><b>Sign Up</b></a>
+        <h3><a href="#" onclick="toggleTable()">Click Here to View the Registered Users & Products</a></h3>
+        <table id="userTable" class="hidden" border="1">
+            <tr>
+                <th>User Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>User Name</th>
+                <th>Products Login</th>
+            </tr>
+            {% for result in data %}
+            <tr>
+                <td>{{result.users_id}}</td>
+                <td>{{result.fname}}</td>
+                <td>{{result.lname}}</td>
+                <td>{{result.uname}}</td>
+                <td><a href="{% url 'addedProductDetails' result.users_id %}"class="styled-link">Login</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>
